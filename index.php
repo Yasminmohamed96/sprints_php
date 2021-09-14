@@ -138,7 +138,7 @@
                                   $post_id=$row['post_id'];
                                   $user_id=$row['user_id'];
 
-                                  $SQL2="SELECT COUNT(*) AS Count FROM comments WHERE post_id='$id'AND user_id='$user_id'";
+                                  $SQL2="SELECT COUNT(*) AS Count FROM comments WHERE post_id='$post_id'AND user_id='$user_id'";
                                   $query2 = mysqli_query($conn, $SQL2);
                                   $comments_count = mysqli_fetch_assoc($query2)
                                   ?>
@@ -163,12 +163,13 @@
                                                     <?php
                                                     $SQL3="SELECT * FROM posts , post_tags, tags WHERE post_tags.post_id=posts.post_id AND post_tags.tag_id=tags.id AND posts.post_id='$post_id' AND posts.user_id='$user_id'; ";
                                                     $query3 = mysqli_query($conn, $SQL3);
-                                                    $tags = mysqli_fetch_assoc($query3)
+                                                    while (($tags  = mysqli_fetch_assoc($query3)) != null){
                                                     ?>
                                                     <li><i class="fa fa-tags"></i></li>
                                                     <li><a href="#"><?php echo $tags['name'];?>
                                                         </a>
                                                     </li>
+                                                    <?php } ?>
                                                 </ul>
                                             </div>
                                             <div class="col-6">
